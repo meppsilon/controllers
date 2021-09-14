@@ -8,7 +8,6 @@ import { BNToHex, query, safelyExecuteWithTimeout } from '../util';
  * @type AccountInformation
  *
  * Account information object
- *
  * @property balance - Hex string of an account balancec in wei
  */
 export interface AccountInformation {
@@ -19,7 +18,6 @@ export interface AccountInformation {
  * @type AccountTrackerConfig
  *
  * Account tracker controller configuration
- *
  * @property provider - Provider used to create a new underlying EthQuery instance
  */
 export interface AccountTrackerConfig extends BaseConfig {
@@ -31,7 +29,6 @@ export interface AccountTrackerConfig extends BaseConfig {
  * @type AccountTrackerState
  *
  * Account tracker controller state
- *
  * @property accounts - Map of addresses to account information
  */
 export interface AccountTrackerState extends BaseState {
@@ -78,13 +75,13 @@ export class AccountTrackerController extends BaseController<
   private getIdentities: () => PreferencesState['identities'];
 
   /**
-   * Creates an AccountTracker instance
+   * Creates an AccountTracker instance.
    *
-   * @param options
-   * @param options.onPreferencesStateChange - Allows subscribing to preference controller state changes
-   * @param options.getIdentities - Gets the identities from the Preferences store
-   * @param config - Initial options used to configure this controller
-   * @param state - Initial state to set on this controller
+   * @param options - The controller options.
+   * @param options.onPreferencesStateChange - Allows subscribing to preference controller state changes.
+   * @param options.getIdentities - Gets the identities from the Preferences store.
+   * @param config - Initial options used to configure this controller.
+   * @param state - Initial state to set on this controller.
    */
   constructor(
     {
@@ -113,11 +110,11 @@ export class AccountTrackerController extends BaseController<
   }
 
   /**
-   * Sets a new provider
+   * Sets a new provider.
    *
-   * TODO: Replace this wth a method
+   * TODO: Replace this wth a method.
    *
-   * @param provider - Provider used to create a new underlying EthQuery instance
+   * @param provider - Provider used to create a new underlying EthQuery instance.
    */
   set provider(provider: any) {
     this.ethQuery = new EthQuery(provider);
@@ -128,9 +125,9 @@ export class AccountTrackerController extends BaseController<
   }
 
   /**
-   * Starts a new polling interval
+   * Starts a new polling interval.
    *
-   * @param interval - Polling interval trigger a 'refresh'
+   * @param interval - Polling interval trigger a 'refresh'.
    */
   async poll(interval?: number): Promise<void> {
     const releaseLock = await this.mutex.acquire();
@@ -144,7 +141,7 @@ export class AccountTrackerController extends BaseController<
   }
 
   /**
-   * Refreshes all accounts in the current keychain
+   * Refreshes all accounts in the current keychain.
    */
   refresh = async () => {
     this.syncAccounts();

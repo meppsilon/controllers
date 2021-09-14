@@ -49,6 +49,7 @@ module.exports = {
       },
     },
   ],
+  plugins: ['jsdoc'],
   rules: {
     // Left disabled because various properties throughough this repo are snake_case because the
     // names come from external sources or must comply with standards
@@ -70,6 +71,50 @@ module.exports = {
     'no-param-reassign': 'off',
     radix: 'off',
     'require-atomic-updates': 'off',
+
+    // TODO: Migrate these rules into the main ESLint config
+    'jsdoc/check-access': 'error',
+    'jsdoc/check-alignment': 'error',
+    'jsdoc/check-indentation': 'error',
+    'jsdoc/check-line-alignment': 'error',
+    'jsdoc/check-param-names': 'error',
+    'jsdoc/check-property-names': 'error',
+    'jsdoc/check-syntax': 'error',
+    'jsdoc/check-tag-names': 'error',
+    'jsdoc/check-types': 'error',
+    'jsdoc/check-values': 'error',
+    'jsdoc/empty-tags': 'error',
+    'jsdoc/implements-on-classes': 'error',
+    'jsdoc/match-description': [
+      'error',
+      { tags: { param: true, returns: true } },
+    ],
+    'jsdoc/multiline-blocks': 'error',
+    'jsdoc/newline-after-description': 'error',
+    'jsdoc/no-bad-blocks': 'error',
+    'jsdoc/no-defaults': 'error',
+    'jsdoc/no-multi-asterisks': 'error',
+    'jsdoc/no-types': 'error',
+    'jsdoc/require-asterisk-prefix': 'error',
+    'jsdoc/require-description': 'error',
+    'jsdoc/require-hyphen-before-param-description': [
+      'error',
+      'always',
+      { tags: { returns: 'never' } },
+    ],
+    'jsdoc/require-jsdoc': 'error',
+    'jsdoc/require-param-name': 'error',
+    'jsdoc/require-param': ['error', { unnamedRootBase: ['options'] }],
+    'jsdoc/require-param-description': 'error',
+    'jsdoc/require-property': 'error',
+    'jsdoc/require-property-description': 'error',
+    'jsdoc/require-property-name': 'error',
+    'jsdoc/require-returns': 'error',
+    'jsdoc/require-returns-check': 'error',
+    'jsdoc/require-returns-description': 'error',
+    'jsdoc/require-yields': 'error',
+    'jsdoc/require-yields-check': 'error',
+    'jsdoc/tag-lines': 'error',
   },
   settings: {
     'import/resolver': {

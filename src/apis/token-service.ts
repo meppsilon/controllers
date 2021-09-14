@@ -2,9 +2,22 @@ import { timeoutFetch } from '../util';
 
 const END_POINT = 'https://token-api.metaswap.codefi.network';
 
+/**
+ * Get the tokens URL for a specific network.
+ *
+ * @param chainId - The chain ID of the network the tokens requested are on.
+ * @returns The tokens URL.
+ */
 function getTokensURL(chainId: string) {
   return `${END_POINT}/tokens/${chainId}`;
 }
+/**
+ * Get the token metadata URL for the given network and token.
+ *
+ * @param chainId - The chain ID of the network the token is on.
+ * @param tokenAddress - The token address.
+ * @returns The token metadata URL.
+ */
 function getTokenMetadataURL(chainId: string, tokenAddress: string) {
   return `${END_POINT}/token/${chainId}?address=${tokenAddress}`;
 }
@@ -14,9 +27,12 @@ function getTokenMetadataURL(chainId: string, tokenAddress: string) {
 const timeout = 10000;
 
 /**
- * Fetches the list of token metadata for a given network chainId
+ * Fetch the list of token metadata for a given network. This request is cancellable using the
+ * abort signal passed in.
  *
- * @returns - Promise resolving token List
+ * @param chainId - The chain ID of the network the requested tokens are on.
+ * @param abortSignal - The abort signal used to cancel the request if necessary.
+ * @returns The token list, or `undefined` if the request was cancelled.
  */
 export async function fetchTokenList(
   chainId: string,
@@ -31,9 +47,13 @@ export async function fetchTokenList(
 }
 
 /**
- * Fetch metadata for the token address provided for a given network chainId
+ * Fetch metadata for the token address provided for a given network. This request is cancellable
+ * using the abort signal passed in.
  *
- * @return Promise resolving token metadata for the tokenAddress provided
+ * @param chainId - The chain ID of the network the token is on.
+ * @param tokenAddress - The address of the token to fetch metadata for.
+ * @param abortSignal - The abort signal used to cancel the request if necessary.
+ * @returns The token metadata, or `undefined` if the request was cancelled.
  */
 export async function fetchTokenMetadata(
   chainId: string,
@@ -49,9 +69,11 @@ export async function fetchTokenMetadata(
 }
 
 /**
- * Perform fetch request against the api
+ * Perform fetch request against the api.
  *
- * @return Promise resolving request response
+ * @param apiURL - The URL of the API to fetch.
+ * @param abortSignal - The abort signal used to cancel the request if necessary.
+ * @returns Promise resolving request response.
  */
 async function queryApi(
   apiURL: string,
@@ -77,9 +99,11 @@ async function queryApi(
 }
 
 /**
- * Parse response
+ * Parse an API response and return the response JSON data.
  *
- * @return Promise resolving request response json value
+ * @param apiResponse - The API response to parse.
+ * @returns The response JSON data.
+ * @throws Will throw if the response includes an error.
  */
 async function parseJsonResponse(apiResponse: Response): Promise<unknown> {
   const responseObj = await apiResponse.json();

@@ -2,6 +2,11 @@ const { errorCodes } = require('eth-rpc-errors');
 const { ControllerMessenger } = require('../ControllerMessenger');
 const { ApprovalController } = require('./ApprovalController');
 
+/**
+ * Constructs a restricted controller messenger.
+ *
+ * @returns A restricted controller messenger.
+ */
 function getRestrictedMessenger() {
   const controllerMessenger = new ControllerMessenger();
   const messenger = controllerMessenger.getRestricted({
@@ -162,22 +167,47 @@ describe('ApprovalController: Input Validation', () => {
 
 // helpers
 
+/**
+ * Get an invalid ID error.
+ *
+ * @returns An invalid ID error.
+ */
 function getInvalidIdError() {
   return getError('Must specify non-empty string id.', errorCodes.rpc.internal);
 }
 
+/**
+ * Get an invalid ID type error.
+ *
+ * @returns An invalid ID type error.
+ */
 function getInvalidHasIdError() {
   return getError('May not specify non-string id.');
 }
 
+/**
+ * Get an invalid origin type error.
+ *
+ * @returns The invalid origin type error.
+ */
 function getInvalidHasOriginError() {
   return getError('May not specify non-string origin.');
 }
 
+/**
+ * Get an invalid type error.
+ *
+ * @returns The invalid type error.
+ */
 function getInvalidHasTypeError() {
   return getError('May not specify non-string type.');
 }
 
+/**
+ * Get an invalid origin error.
+ *
+ * @returns The invalid origin error.
+ */
 function getInvalidOriginError() {
   return getError(
     'Must specify non-empty string origin.',
@@ -185,6 +215,11 @@ function getInvalidOriginError() {
   );
 }
 
+/**
+ * Get an invalid request data error.
+ *
+ * @returns The invalid request data error.
+ */
 function getInvalidRequestDataError() {
   return getError(
     'Request data must be a plain object if specified.',
@@ -192,18 +227,41 @@ function getInvalidRequestDataError() {
   );
 }
 
+/**
+ * Get an invalid type error.
+ *
+ * @param code - The error code.
+ * @returns The invalid type error.
+ */
 function getInvalidTypeError(code) {
   return getError('Must specify non-empty string type.', code);
 }
 
+/**
+ * Get an invalid params error.
+ *
+ * @returns The invalid params error.
+ */
 function getInvalidHasParamsError() {
   return getError('Must specify a valid combination of id, origin, and type.');
 }
 
+/**
+ * Get an invalid approval count params error.
+ *
+ * @returns The invalid approval count params error.
+ */
 function getApprovalCountParamsError() {
   return getError('Must specify origin, type, or both.');
 }
 
+/**
+ * Get an Error.
+ *
+ * @param message - The error message.
+ * @param code - The error code.
+ * @returns An Error.
+ */
 function getError(message, code) {
   const err = {
     name: 'Error',
